@@ -5,9 +5,11 @@ import org.newdawn.slick.BasicGame;
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
 import org.newdawn.slick.Image;
+import org.newdawn.slick.Input;
 import org.newdawn.slick.SlickException;
 
 import component.Component;
+import component.ControllerComponent;
 import component.render.ImageRenderComponent;
 
 import camera.*;
@@ -41,6 +43,7 @@ public class Demo extends BasicGame {
 		dot = new Entity("dot", entityManager);
 
 		dot.addComponent(Component.TYPE_RENDER, new ImageRenderComponent(new Image("/img/img.jpg")));
+		dot.addComponent(Component.TYPE_CONTROLLER, new ControllerComponent(dot));
 
 		dot.initComponents();
 
@@ -53,6 +56,10 @@ public class Demo extends BasicGame {
 
 	@Override
 	public void update(GameContainer gc, int delta) throws SlickException {
+				if (gc.getInput().isKeyDown(Input.KEY_ESCAPE)) {
+					System.exit(0);
+				}
+		
 		entityManager.update(gc, null, delta);
 
 		camera.update(dot, gc, delta);

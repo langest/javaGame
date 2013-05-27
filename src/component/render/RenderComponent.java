@@ -9,7 +9,11 @@ import component.RenderableComponent;
 
 public abstract class RenderComponent extends Component implements RenderableComponent {
 
-    public abstract int getWidth();
+    public RenderComponent() {
+		super(Component.TYPE_RENDER);
+	}
+
+	public abstract int getWidth();
    
     public abstract int getHeight();
 	

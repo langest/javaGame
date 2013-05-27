@@ -16,7 +16,7 @@ import manager.EntityManager;
 public class Entity{
 	private String ID;
 
-	private Vector2D position;
+	private Vector2D position; //TODO move to physics comoponent?
 
 	private EntityManager entityManager;
 	private HashMap<Integer, Component> components;
@@ -42,12 +42,12 @@ public class Entity{
 		return this.entityManager;
 	}
 
-	public Vector2D getPosition() {
-		return position;
-	}
-
 	public void setPosition(Vector2D position) {
 		this.position = position;
+	}
+	
+	public Vector2D getPosition() {
+		return position;
 	}
 
 	public int getWidth() {
