@@ -1,6 +1,5 @@
 package demo;
 
-
 import org.newdawn.slick.AppGameContainer;
 import org.newdawn.slick.BasicGame;
 import org.newdawn.slick.GameContainer;
@@ -23,7 +22,14 @@ public class Demo extends BasicGame {
 
 	Camera camera;
 
-	Demo() {
+	public static void main(String[] args) throws SlickException {
+		AppGameContainer app = new AppGameContainer(new Demo());
+
+		app.setDisplayMode(1020, 540, false);
+		app.start();
+	}
+	
+	public Demo() {
 		super("Demo");
 	}
 
@@ -34,7 +40,7 @@ public class Demo extends BasicGame {
 
 		dot = new Entity("dot", entityManager);
 
-		dot.addComponent(Component.TYPE_RENDER, new ImageRenderComponent(new Image("img/tstimg")));
+		dot.addComponent(Component.TYPE_RENDER, new ImageRenderComponent(new Image("/img/img.jpg")));
 
 		dot.initComponents();
 
@@ -59,13 +65,6 @@ public class Demo extends BasicGame {
 		entityManager.render(gc, null, gr);
 
 		camera.renderDone(gr);
-	}
-
-	public static void main(String[] args) throws SlickException {
-		AppGameContainer app = new AppGameContainer(new Demo());
-
-		app.setDisplayMode(1020, 540, false);
-		app.start();
 	}
 
 }
