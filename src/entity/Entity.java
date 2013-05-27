@@ -14,7 +14,7 @@ import component.RenderableComponent;
 import manager.EntityManager;
 
 public class Entity{
-	private int ID;
+	private String ID;
 
 	private Vector2D position;
 
@@ -22,14 +22,14 @@ public class Entity{
 	private HashMap<Integer, Component> components;
 
 
-	public Entity (int ID, EntityManager em) {
+	public Entity (String ID, EntityManager em) {
 		this.ID = ID;
 		this.entityManager = em;
 		components = new HashMap<Integer, Component>();
 		position = new Vector2D();
 	}
 
-	public void addComponent (Component component, Integer componentType) {
+	public void addComponent (Integer componentType, Component component) {
 		component.setOwner(this);
 		components.put(componentType, component);
 	}
@@ -93,7 +93,7 @@ public class Entity{
 		}
 	}
 
-	public Integer getId() {
+	public String getId() {
 		return ID;
 	}
 
