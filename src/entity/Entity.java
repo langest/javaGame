@@ -63,21 +63,21 @@ public class Entity{
 		}
 	}
 
-    public void initComponents() {
-            for (Component c : components.values()) {
-                    try {
-                            c.init();
-                    } catch (ComponentException e) {
-                            System.err.println("initComponents() failed in\n entity: " + ID + "\n component: " + c.getClass().getName() + ".");
-                            e.printStackTrace();
-                            System.exit(0);
-                    }
-            }
-    }
+	public void initComponents() {
+		for (Component c : components.values()) {
+			try {
+				c.init();
+			} catch (ComponentException e) {
+				System.err.println("initComponents() failed in\n entity: " + ID + "\n component: " + c.getClass().getName() + ".");
+				e.printStackTrace();
+				System.exit(0);
+			}
+		}
+	}
 
-    public Integer getId() {
-            return ID;
-    }
+	public Integer getId() {
+		return ID;
+	}
 
 
 }
