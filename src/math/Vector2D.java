@@ -2,10 +2,10 @@ package math;
 
 public class Vector2D {
 
-	public double x;
-	public double y;
+	public float x;
+	public float y;
 
-	public Vector2D(double x, double y) {
+	public Vector2D(float x, float y) {
 		this.x = x;
 		this.y = y;
 	}
@@ -15,15 +15,15 @@ public class Vector2D {
 		this.y = 0;
 	}
 
-	public void addToX(double increment) {
+	public void addToX(float increment) {
 		this.x += increment;
 	}
 
-	public void addToY(double increment) {
+	public void addToY(float increment) {
 		this.y += increment;
 	}
 
-	public void add(double x, double y) {
+	public void add(float x, float y) {
 		this.x += x;
 		this.y += y;
 	}
@@ -33,15 +33,15 @@ public class Vector2D {
 		this.y += vec.y;
 	}
 
-	public void subFromX(double decrement) {
+	public void subFromX(float decrement) {
 		this.x -= decrement;
 	}
 
-	public void subFromY(double decrement) {
+	public void subFromY(float decrement) {
 		this.y -= decrement;
 	}
 
-	public void sub(double x, double y) {
+	public void sub(float x, float y) {
 		this.x -= x;
 		this.y -= y;
 	}
@@ -51,8 +51,8 @@ public class Vector2D {
 		this.y -= vec.y;
 	}
 
-	public double getMagnitude() {
-		return Math.sqrt(Math.pow(x, 2) + Math.pow(y, 2));
+	public float getMagnitude() {
+		return (float) Math.sqrt(Math.pow(x, 2) + Math.pow(y, 2));
 	}
 
 }

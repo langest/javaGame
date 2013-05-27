@@ -9,6 +9,7 @@ import org.newdawn.slick.Graphics;
 import math.Vector2D;
 import component.Component;
 import component.ComponentException;
+import component.render.RenderComponent;
 import component.RenderableComponent;
 import manager.EntityManager;
 
@@ -49,6 +50,23 @@ public class Entity{
 		this.position = position;
 	}
 
+	public int getWidth() {
+		RenderComponent rend = (RenderComponent) getComponentByType(Component.TYPE_RENDER);
+		if (rend != null)
+			return rend.getWidth();
+		else
+			return 0;
+	}
+
+	public int getHeight() {
+		RenderComponent rend =  (RenderComponent) getComponentByType(Component.TYPE_RENDER);
+		if (rend != null)
+			return rend.getHeight();
+		else
+			return 0;
+	}
+
+
 	public void update(GameContainer gc, BasicGame bg, int delta) {
 		for (Component comp : components.values()) {
 			comp.update(gc, bg, delta);
@@ -57,7 +75,7 @@ public class Entity{
 
 	public void render(GameContainer gc, BasicGame bg, Graphics gr) {
 		for(Component c : components.values()) {
-			if(c.getComponentType() == Component.COMPONENT_RENDER) {
+			if(c.getComponentType() == Component.TYPE_RENDER) {
 				((RenderableComponent) c).render(gc, bg, gr);
 			}
 		}

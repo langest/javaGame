@@ -7,7 +7,7 @@ import entity.Entity;
 
 public abstract class Component {
 
-	public static final int COMPONENT_RENDER  = 0;
+	public static final int TYPE_RENDER  = 0;
 
 	protected Entity owner;
 	protected int componentType;

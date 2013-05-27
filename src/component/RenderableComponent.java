@@ -5,5 +5,5 @@ import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
 
 public interface RenderableComponent {
-	void render(GameContainer gc, BasicGame sb, Graphics gr);
+        void render(GameContainer gc, BasicGame bg, Graphics gr);
 }
