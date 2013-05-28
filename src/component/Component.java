@@ -7,15 +7,27 @@ import entity.Entity;
 
 public abstract class Component {
 
-	public static final int TYPE_INVALID    = 0,
-							TYPE_RENDER     = 1,
-							TYPE_CONTROLLER = 2;
-
+	public static final int TYPE_INVALID	= 0,
+							TYPE_RENDER		= 1,
+							TYPE_CONTROLLER	= 2,
+							TYPE_PHYSICS	= 3,
+							TYPE_ATTRACTION	= 4;
+	
 	protected Entity owner;
 	protected int componentType = TYPE_INVALID;
 
-	public Component(int type) {
+	/**
+	 * Creates a component of type type.
+	 * 
+	 * Type makes sure that each entity only contains one of
+	 * each type of component.
+	 * 
+	 * @param type The type ID of this component. e.g. TYPE_RENDER
+	 * for a render component and TYPE_PHYSICS for a physics component.
+	 */
+	public Component(int type, Entity owner) {
 		this.componentType = type;
+		setOwner(owner);
 	}
 	
 	public void setOwner (Entity owner) {
