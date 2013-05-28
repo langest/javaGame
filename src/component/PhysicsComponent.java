@@ -11,9 +11,14 @@ public class PhysicsComponent extends Component{
 
 	private float weight;
 	private Vector2D velocity;
+	private Vector2D acceleration;
+	private float friction = 2f;
 
-	public PhysicsComponent(Entity owner) {
+	public PhysicsComponent(Entity owner, float weight) {
 		super(Component.TYPE_PHYSICS, owner);
+		this.weight = weight;
+		velocity = new Vector2D();
+		acceleration = new Vector2D();
 
 	}
 
@@ -58,7 +63,7 @@ public class PhysicsComponent extends Component{
 	 * @param delta
 	 * @return
 	 */
-	protected float newVelocity(float velocity, float acceleration, float friction, int delta) {
+	protected float newVelocity(float velocity, float acceleration, int delta) {
 		float newVelocity = (float) (velocity / Math.pow(friction, delta));
 		if (friction == 1) {
 			return newVelocity + acceleration * delta;
@@ -67,10 +72,30 @@ public class PhysicsComponent extends Component{
 		}
 	}
 
+	public void accelerate(Vector2D acc) {
+		this.acceleration.addVector(acc);
+	}
+	
+	private void move(int delta) {
+		Vector2D oldVelocity = new Vector2D(velocity.x, velocity.y);
+		
+		velocity.x = newVelocity(velocity.x, acceleration.x, delta);
+		velocity.y = newVelocity(velocity.y, acceleration.y, delta);
+
+		Vector2D position = owner.getPosition();
+
+		position.x = position.x + (float) delta / 2 * (oldVelocity.x + velocity.x); //Heun's method
+		position.y = position.y + (float) delta / 2 * (oldVelocity.y + velocity.y);
+		
+	}
+	
+	protected void resetAcceleration() {
+		acceleration = new Vector2D();
+	}
+
 	@Override
 	public void update(GameContainer gc, BasicGame bg, int delta) {
-		// Do nothing.
-
+		move(delta);
 	}
 
 	@Override

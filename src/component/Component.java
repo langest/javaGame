@@ -7,11 +7,11 @@ import entity.Entity;
 
 public abstract class Component {
 
-	public static final int TYPE_INVALID	= 0,
-							TYPE_RENDER		= 1,
-							TYPE_CONTROLLER	= 2,
-							TYPE_PHYSICS	= 3,
-							TYPE_ATTRACTION	= 4;
+	public static final int TYPE_INVALID		= 0,
+							TYPE_RENDER			= 1,
+							TYPE_CONTROLLER		= 2,
+							TYPE_PHYSICS		= 3,
+							TYPE_GRAVITATION	= 4;
 	
 	protected Entity owner;
 	protected int componentType = TYPE_INVALID;

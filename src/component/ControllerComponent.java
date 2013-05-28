@@ -1,5 +1,9 @@
 package component;
 
+import component.PhysicsComponent;
+
+import math.Vector2D;
+
 import org.newdawn.slick.BasicGame;
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Input;
@@ -18,21 +22,23 @@ public class ControllerComponent extends Component{
 	public void update(GameContainer gc, BasicGame bg, int delta) {
 		input = gc.getInput();
 		if (input.isKeyDown(Input.KEY_S)) {
-			owner.getPosition().addToY(5*delta);
+			((PhysicsComponent) owner.getComponentByType(Component.TYPE_PHYSICS)).accelerate(new Vector2D(0, .1f * delta));
 		}
 		if (input.isKeyDown(Input.KEY_W)) {
-			owner.getPosition().subFromY(5*delta);
+			((PhysicsComponent) owner.getComponentByType(Component.TYPE_PHYSICS)).accelerate(new Vector2D(0, -.1f * delta));
 		}
 		if (input.isKeyDown(Input.KEY_D)) {
-			owner.getPosition().addToX(5*delta);
+			owner.getPosition().addToX(delta);
 		}
 		if (input.isKeyDown(Input.KEY_A)) {
-			owner.getPosition().subFromX(5*delta);
+			owner.getPosition().subFromX(delta);
 		}
 	}
 
 	@Override
 	public void init() throws ComponentException {
-
+		if (owner.getComponentByType(Component.TYPE_PHYSICS) == null) {
+			throw new ComponentException("Failed to initialize GravityComponent because of missing dependencies.");
+		}
 	}
 }

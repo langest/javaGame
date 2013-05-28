@@ -6,11 +6,12 @@ import org.newdawn.slick.Graphics;
 
 import component.Component;
 import component.RenderableComponent;
+import entity.Entity;
 
 public abstract class RenderComponent extends Component implements RenderableComponent {
 
-    public RenderComponent() {
-		super(Component.TYPE_RENDER);
+    public RenderComponent(Entity owner) {
+		super(Component.TYPE_RENDER, owner);
 	}
 
 	public abstract int getWidth();

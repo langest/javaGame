@@ -9,9 +9,14 @@ import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
 import org.newdawn.slick.Image;
 
+import entity.Entity;
+
 public class ImageRenderComponent extends RenderComponent {    
+	
 	Image image;
-	public ImageRenderComponent(Image image) {
+	
+	public ImageRenderComponent(Image image, Entity owner) {
+		super(owner);
 		this.image = image;
 	}
 
@@ -34,7 +39,7 @@ public class ImageRenderComponent extends RenderComponent {
 	@Override
 	public void render(GameContainer gc, BasicGame bg, Graphics gr) {
 		Vector2D pos = owner.getPosition();
-		image.draw(pos.x, pos.y);
+		image.draw(pos.x-image.getWidth()/2, pos.y-image.getHeight()/2);
 	}
 
 	@Override

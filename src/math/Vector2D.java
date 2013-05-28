@@ -54,5 +54,19 @@ public class Vector2D {
 	public float getMagnitude() {
 		return (float) Math.sqrt(Math.pow(x, 2) + Math.pow(y, 2));
 	}
+	
+	/**
+	 * Multiplies x- and y-component of this vector by s.
+	 * @param s The scaling factor.
+	 */
+	public void scaleBy(float s) {
+		x = x*s;
+		y = y*s;
+	}
+	
+	@Override
+	public String toString(){
+		return "x = " + x + ", y = " + y;
+	}
 
 }

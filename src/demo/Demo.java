@@ -10,6 +10,8 @@ import org.newdawn.slick.SlickException;
 
 import component.Component;
 import component.ControllerComponent;
+import component.GravitationComponent;
+import component.PhysicsComponent;
 import component.render.ImageRenderComponent;
 
 import camera.*;
@@ -20,7 +22,7 @@ import manager.EntityManager;
 public class Demo extends BasicGame {
 
 	EntityManager entityManager;
-	Entity dot;
+	Entity dot, dot2;
 
 	Camera camera;
 
@@ -41,15 +43,20 @@ public class Demo extends BasicGame {
 		camera = new Camera(gc);
 
 		dot = new Entity("dot", entityManager);
-
-		dot.addComponent(Component.TYPE_RENDER, new ImageRenderComponent(new Image("/img/img.jpg")));
-		dot.addComponent(Component.TYPE_CONTROLLER, new ControllerComponent(dot));
-
-		dot.initComponents();
-
 		dot.setPosition(new Vector2D(461, 300));
-
+		dot.addComponent(Component.TYPE_RENDER, new ImageRenderComponent(new Image("/img/img.jpg"), dot));
+		dot.addComponent(Component.TYPE_CONTROLLER, new ControllerComponent(dot));
+		dot.addComponent(Component.TYPE_PHYSICS, new PhysicsComponent(dot, 10f));
+		dot.initComponents();
 		entityManager.add(dot);
+		
+		dot2 = new Entity("dot2", entityManager);
+		dot2.setPosition(new Vector2D(400, 150));
+		dot2.addComponent(Component.TYPE_RENDER, new ImageRenderComponent(new Image("/img/img.jpg"), dot2));
+		dot2.addComponent(Component.TYPE_PHYSICS, new PhysicsComponent(dot2, 10f));
+		//dot2.addComponent(Component.TYPE_GRAVITATION, new GravitationComponent(dot2));
+		dot2.initComponents();
+		entityManager.add(dot2);
 
 		gc.setTargetFrameRate(60);
 	}
