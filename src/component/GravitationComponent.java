@@ -10,7 +10,7 @@ import entity.Entity;
 
 public class GravitationComponent extends Component{
 
-	public static final float gravConst = 1;
+	public static final float gravConst = PhysicsComponent.STANDARD_ACCELERATION * 1000;
 
 	public GravitationComponent(Entity owner) {
 		super(Component.TYPE_GRAVITATION, owner);

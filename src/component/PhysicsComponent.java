@@ -8,11 +8,15 @@ import org.newdawn.slick.GameContainer;
 import entity.Entity;
 
 public class PhysicsComponent extends Component{
+	
+	public static final float STANDARD_ACCELERATION = .0001f;
 
 	private float weight;
 	private Vector2D velocity;
 	private Vector2D acceleration;
-	private float friction = 2f;
+	private float friction = 1.000001f;
+	private float maxVelocity = -STANDARD_ACCELERATION / ((1 / friction) - 1);
+
 
 	public PhysicsComponent(Entity owner, float weight) {
 		super(Component.TYPE_PHYSICS, owner);
@@ -28,7 +32,7 @@ public class PhysicsComponent extends Component{
 
 	public void setWeight(float weight) {
 		this.weight = weight;
-	}
+	};
 
 	public Vector2D getVelocity() {
 		return velocity;
@@ -37,7 +41,7 @@ public class PhysicsComponent extends Component{
 	public void setVelocity(Vector2D velocity) {
 		this.velocity = velocity;
 	}
-
+;
 	/**
 	 * Calculates the new velocity in a direction given the old velocity and the acceleration.
 	 * 
@@ -77,20 +81,30 @@ public class PhysicsComponent extends Component{
 	}
 	
 	private void move(int delta) {
+		
 		Vector2D oldVelocity = new Vector2D(velocity.x, velocity.y);
 		
 		velocity.x = newVelocity(velocity.x, acceleration.x, delta);
 		velocity.y = newVelocity(velocity.y, acceleration.y, delta);
+		
+		if (velocity.getMagnitude() > maxVelocity) {
+			float scaling = maxVelocity / velocity.getMagnitude();
+			velocity.x = velocity.x * scaling;
+			velocity.y = velocity.y * scaling;
+		}
 
 		Vector2D position = owner.getPosition();
 
 		position.x = position.x + (float) delta / 2 * (oldVelocity.x + velocity.x); //Heun's method
 		position.y = position.y + (float) delta / 2 * (oldVelocity.y + velocity.y);
 		
+		resetAcceleration();
+		
 	}
 	
-	protected void resetAcceleration() {
-		acceleration = new Vector2D();
+	private void resetAcceleration() {
+		acceleration.x = 0;
+		acceleration.y = 0;
 	}
 
 	@Override

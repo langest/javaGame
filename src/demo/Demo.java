@@ -46,15 +46,16 @@ public class Demo extends BasicGame {
 		dot.setPosition(new Vector2D(461, 300));
 		dot.addComponent(Component.TYPE_RENDER, new ImageRenderComponent(new Image("/img/img.jpg"), dot));
 		dot.addComponent(Component.TYPE_CONTROLLER, new ControllerComponent(dot));
+		dot.addComponent(Component.TYPE_GRAVITATION, new GravitationComponent(dot));
 		dot.addComponent(Component.TYPE_PHYSICS, new PhysicsComponent(dot, 10f));
 		dot.initComponents();
 		entityManager.add(dot);
 		
 		dot2 = new Entity("dot2", entityManager);
-		dot2.setPosition(new Vector2D(400, 150));
+		dot2.setPosition(new Vector2D(300, 150));
 		dot2.addComponent(Component.TYPE_RENDER, new ImageRenderComponent(new Image("/img/img.jpg"), dot2));
 		dot2.addComponent(Component.TYPE_PHYSICS, new PhysicsComponent(dot2, 10f));
-		//dot2.addComponent(Component.TYPE_GRAVITATION, new GravitationComponent(dot2));
+		dot2.addComponent(Component.TYPE_GRAVITATION, new GravitationComponent(dot2));
 		dot2.initComponents();
 		entityManager.add(dot2);
 

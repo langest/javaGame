@@ -22,16 +22,16 @@ public class ControllerComponent extends Component{
 	public void update(GameContainer gc, BasicGame bg, int delta) {
 		input = gc.getInput();
 		if (input.isKeyDown(Input.KEY_S)) {
-			((PhysicsComponent) owner.getComponentByType(Component.TYPE_PHYSICS)).accelerate(new Vector2D(0, .1f * delta));
+			((PhysicsComponent) owner.getComponentByType(Component.TYPE_PHYSICS)).accelerate(new Vector2D(0, PhysicsComponent.STANDARD_ACCELERATION * delta));
 		}
 		if (input.isKeyDown(Input.KEY_W)) {
-			((PhysicsComponent) owner.getComponentByType(Component.TYPE_PHYSICS)).accelerate(new Vector2D(0, -.1f * delta));
+			((PhysicsComponent) owner.getComponentByType(Component.TYPE_PHYSICS)).accelerate(new Vector2D(0, -PhysicsComponent.STANDARD_ACCELERATION* delta));
 		}
 		if (input.isKeyDown(Input.KEY_D)) {
-			owner.getPosition().addToX(delta);
+			((PhysicsComponent) owner.getComponentByType(Component.TYPE_PHYSICS)).accelerate(new Vector2D(PhysicsComponent.STANDARD_ACCELERATION * delta, 0));
 		}
 		if (input.isKeyDown(Input.KEY_A)) {
-			owner.getPosition().subFromX(delta);
+			((PhysicsComponent) owner.getComponentByType(Component.TYPE_PHYSICS)).accelerate(new Vector2D(-PhysicsComponent.STANDARD_ACCELERATION * delta, 0));
 		}
 	}
 
