@@ -5,13 +5,14 @@ import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
 
 import component.Component;
+import component.ComponentType;
 import component.RenderableComponent;
 import entity.Entity;
 
 public abstract class RenderComponent extends Component implements RenderableComponent {
 
     public RenderComponent(Entity owner) {
-		super(Component.TYPE_RENDER, owner);
+		super(ComponentType.RENDER, owner);
 	}
 
 	public abstract int getWidth();

@@ -9,6 +9,7 @@ import org.newdawn.slick.Graphics;
 import math.Vector2D;
 import component.Component;
 import component.ComponentException;
+import component.ComponentType;
 import component.render.RenderComponent;
 import component.RenderableComponent;
 import manager.EntityManager;
@@ -19,22 +20,22 @@ public class Entity{
 	private Vector2D position; //TODO move to physics comoponent?
 
 	private EntityManager entityManager;
-	private HashMap<Integer, Component> components;
+	private HashMap<ComponentType, Component> components;
 
 
 	public Entity (String ID, EntityManager em) {
 		this.ID = ID;
 		this.entityManager = em;
-		components = new HashMap<Integer, Component>();
+		components = new HashMap<ComponentType, Component>();
 		position = new Vector2D();
 	}
 
-	public void addComponent (Integer componentType, Component component) {
+	public void addComponent (ComponentType componentType, Component component) {
 		component.setOwner(this);
 		components.put(componentType, component);
 	}
 
-	public Component getComponentByType(Integer componentType) {
+	public Component getComponentByType(ComponentType componentType) {
 		return components.get(componentType);
 	}
 
@@ -51,7 +52,7 @@ public class Entity{
 	}
 
 	public int getWidth() {
-		RenderComponent rend = (RenderComponent) getComponentByType(Component.TYPE_RENDER);
+		RenderComponent rend = (RenderComponent) getComponentByType(ComponentType.RENDER);
 		if (rend != null)
 			return rend.getWidth();
 		else
@@ -59,7 +60,7 @@ public class Entity{
 	}
 
 	public int getHeight() {
-		RenderComponent rend =  (RenderComponent) getComponentByType(Component.TYPE_RENDER);
+		RenderComponent rend =  (RenderComponent) getComponentByType(ComponentType.RENDER);
 		if (rend != null)
 			return rend.getHeight();
 		else
@@ -75,7 +76,7 @@ public class Entity{
 
 	public void render(GameContainer gc, BasicGame bg, Graphics gr) {
 		for(Component c : components.values()) {
-			if(c.getComponentType() == Component.TYPE_RENDER) {
+			if(c.getComponentType() == ComponentType.RENDER) {
 				((RenderableComponent) c).render(gc, bg, gr);
 			}
 		}

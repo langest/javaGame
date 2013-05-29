@@ -13,7 +13,7 @@ public class GravitationComponent extends Component{
 	public static final float gravConst = PhysicsComponent.STANDARD_ACCELERATION * 1000;
 
 	public GravitationComponent(Entity owner) {
-		super(Component.TYPE_GRAVITATION, owner);
+		super(ComponentType.GRAVITATION, owner);
 	}
 	
 	/**
@@ -57,14 +57,14 @@ public class GravitationComponent extends Component{
 
 	@Override
 	public void update(GameContainer gc, BasicGame bg, int delta) {
-		PhysicsComponent ownerPC = (PhysicsComponent) owner.getComponentByType(Component.TYPE_PHYSICS);
+		PhysicsComponent ownerPC = (PhysicsComponent) owner.getComponentByType(ComponentType.PHYSICS);
 		PhysicsComponent targetPC = null;
 		Vector2D targetPos = null;
 		Vector2D ownerPos = owner.getPosition();
 		Vector2D acceleration = null;
 
 		for (Entity e : owner.getEntityManager().getEntityList()) {
-			targetPC = (PhysicsComponent) e.getComponentByType(Component.TYPE_PHYSICS);
+			targetPC = (PhysicsComponent) e.getComponentByType(ComponentType.PHYSICS);
 			if (targetPC != null && e != owner) {
 				targetPos = e.getPosition();
 
@@ -79,7 +79,7 @@ public class GravitationComponent extends Component{
 
 	@Override
 	public void init() throws ComponentException {
-		if (owner.getComponentByType(Component.TYPE_PHYSICS) == null) {
+		if (owner.getComponentByType(ComponentType.PHYSICS) == null) {
 			throw new ComponentException("Failed to initialize GravityComponent because of missing dependencies.");
 		}
 	}

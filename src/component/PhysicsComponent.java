@@ -14,12 +14,12 @@ public class PhysicsComponent extends Component{
 	private float weight;
 	private Vector2D velocity;
 	private Vector2D acceleration;
-	private float friction = 1.000001f;
+	private float friction = 1.00001f;
 	private float maxVelocity = -STANDARD_ACCELERATION / ((1 / friction) - 1);
 
 
 	public PhysicsComponent(Entity owner, float weight) {
-		super(Component.TYPE_PHYSICS, owner);
+		super(ComponentType.PHYSICS, owner);
 		this.weight = weight;
 		velocity = new Vector2D();
 		acceleration = new Vector2D();
