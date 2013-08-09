@@ -27,17 +27,18 @@ public class CollisionComponentRect extends Component{
 	/**
 	 * Returns the separating axises for this collision component.
 	 * 
-	 * angle is the direction of the other collision component.
+	 * Angle is the direction to the center of the other collision components owner.
 	 * As the unit circle. As radians.
 	 * First in the list is the owners position, second in list is the vertical SAT, third The horizontal.
 	 */
 	public ArrayList<Vector2D> getSATRect(float angle) {
 		angle = (float) (angle % (Math.PI * 2));
 		ArrayList<Vector2D> ret = new ArrayList<Vector2D>();
+		Vector2D ownerPos = owner.getPosition();
 		
 		ret.add(owner.getPosition());
 		if (angle < Math.PI/2) {
-			ret.add(new Vector2D(0,-height/2));
+			ret.add(new Vector2D(ownerPos.x, ownerPos.y-height/2));
 			ret.add(new Vector2D(width/2, 0));
 		}else if(angle < Math.PI) {
 			ret.add(new Vector2D(0,-height/2));

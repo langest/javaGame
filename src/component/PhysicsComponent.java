@@ -14,7 +14,7 @@ public class PhysicsComponent extends Component{
 	private float weight;
 	private Vector2D velocity;
 	private Vector2D acceleration;
-	private float friction = 1.00001f;
+	private float friction = 1.01f;
 	private float maxVelocity = -STANDARD_ACCELERATION / ((1 / friction) - 1);
 
 

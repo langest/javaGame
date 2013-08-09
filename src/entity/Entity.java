@@ -17,7 +17,7 @@ import manager.EntityManager;
 public class Entity{
 	private String ID;
 
-	private Vector2D position; //TODO move to physics comoponent?
+	private Vector2D position; //This is in the center of the entity, not in the upper left corner. //TODO move to physics comoponent? probably not...
 
 	private EntityManager entityManager;
 	private HashMap<ComponentType, Component> components;
@@ -69,6 +69,7 @@ public class Entity{
 
 
 	public void update(GameContainer gc, BasicGame bg, int delta) {
+		System.out.println(position); //TODO testing here
 		for (Component comp : components.values()) {
 			comp.update(gc, bg, delta);
 		}

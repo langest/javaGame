@@ -1,5 +1,12 @@
 package math;
 
+/**
+ * A vector representation from (0,0) to (x,y).
+ * 
+ * @author daniel
+ *
+ */
+
 public class Vector2D {
 
 	public float x;
@@ -14,39 +21,44 @@ public class Vector2D {
 		this.x = 0;
 		this.y = 0;
 	}
+	
+	public Vector2D(Vector2D vec) {
+		this.x = vec.x;
+		this.y = vec.y;
+	}
 
-	public void addToX(float increment) {
+	/*public void addToX(float increment) {
 		this.x += increment;
 	}
 
 	public void addToY(float increment) {
 		this.y += increment;
-	}
-
+	}*/
+	
 	public void add(float x, float y) {
 		this.x += x;
 		this.y += y;
 	}
 
-	public void addVector(Vector2D vec) {
+	public void add(Vector2D vec) {
 		this.x += vec.x;
 		this.y += vec.y;
 	}
 
-	public void subFromX(float decrement) {
+	/*public void subFromX(float decrement) {
 		this.x -= decrement;
 	}
 
 	public void subFromY(float decrement) {
 		this.y -= decrement;
-	}
+	}*/
 
 	public void sub(float x, float y) {
 		this.x -= x;
 		this.y -= y;
 	}
 
-	public void subVector(Vector2D vec) {
+	public void sub(Vector2D vec) {
 		this.x -= vec.x;
 		this.y -= vec.y;
 	}
