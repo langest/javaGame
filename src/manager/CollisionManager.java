@@ -14,23 +14,10 @@ import math.Vector2D;
 
 public class CollisionManager {
 
-	/**
-	 * Returns the angle between two enteties.
-	 * 
-	 * @param a
-	 * @param aPos
-	 * @param b
-	 * @param bPos
-	 * @return
-	 */
+	
 	public float getCollisionAngle(CollisionComponentRect a, Vector2D aPos, CollisionComponentRect b, Vector2D bPos) {
+			return 0;
 
-		Vector2D vec = new Vector2D(bPos);
-		vec.sub(aPos);
-
-		float alpha = (float) Math.atan2(vec.y, vec.x);
-		
-		return alpha;
 	}
 
 	public void update(ArrayList<Entity> entityList) { //TODO
@@ -40,7 +27,8 @@ public class CollisionManager {
 			c1 = (CollisionComponentRect) e1.getComponentByType(ComponentType.COLLISION);
 			for (Entity e2 : entityList) {
 				c2 = (CollisionComponentRect) e2.getComponentByType(ComponentType.COLLISION);
-				if (!e1.toString().equals("Player") && e2.toString().equals("Player")) System.out.println("Collision between " + e1 + " and " + e2 + " results in angle: " + getCollision(c1, e1.getPosition(), c2, e2.getPosition()));
+				if (!e1.toString().equals("Player") && e2.toString().equals("Player")) System.out.println("Collision between " + e1 + " and " + e2 + " results in angle: "
+				+ e1.getPosition().getAngleToPos(e2.getPosition()));
 			}
 		}
 	}

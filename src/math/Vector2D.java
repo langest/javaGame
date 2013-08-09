@@ -68,25 +68,25 @@ public class Vector2D {
 	}
 	
 	/**
-	 * Calculates the angle from pos1 to pos 2.
+	 * Calculates the angle from this vector to another vector.
 	 * Remember, the unit-circle is upside-down in this coordinatesystem.
 	 * 
 	 * 			  y-axis
 	 * 				/\
-	 * 				|   o  <--pos2
+	 * 				|   o  <--pos
 	 * 				|  /
 	 * 				| /_ 
 	 * 				|/  ) <--angle
-	 * 		pos1-->	o--------------> x-axis
+	 * 	thisPos-->	o--------------> x-axis
 	 * 
 	 * 
 	 * @param pos1 the position we want to calculate from
 	 * @param pos2 the posistion we want to calculate the angle to
 	 * @return the angle
 	 */
-	public float getAngle(Vector2D pos1, Vector2D pos2) {
-		Vector2D vec = new Vector2D(pos2);
-		vec.sub(pos1);
+	public float getAngleToPos(Vector2D pos) {
+		Vector2D vec = new Vector2D(pos);
+		vec.sub(this);
 
 		float alpha = (float) Math.atan2(vec.y, vec.x);
 		
