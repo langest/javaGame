@@ -9,7 +9,7 @@ import entity.Entity;
 
 public class PhysicsComponent extends Component{
 	
-	public static final float STANDARD_ACCELERATION = .0001f;
+	public static final float STANDARD_ACCELERATION = .001f;
 
 	private float weight;
 	private Vector2D velocity;
@@ -77,7 +77,7 @@ public class PhysicsComponent extends Component{
 	}
 
 	public void accelerate(Vector2D acc) {
-		this.acceleration.addVector(acc);
+		this.acceleration.add(acc);
 	}
 	
 	private void move(int delta) {

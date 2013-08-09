@@ -30,6 +30,7 @@ public class EntityManager {
 		for (Entity e : entityList) {
 			e.update(gc, bg, delta);
 		}
+		collisionManager.update(entityList);
 	}
 
 	public void render(GameContainer gc, BasicGame bg, Graphics gr) {

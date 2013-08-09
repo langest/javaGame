@@ -69,7 +69,6 @@ public class Entity{
 
 
 	public void update(GameContainer gc, BasicGame bg, int delta) {
-		System.out.println(position); //TODO testing here
 		for (Component comp : components.values()) {
 			comp.update(gc, bg, delta);
 		}
@@ -96,6 +95,11 @@ public class Entity{
 	}
 
 	public String getId() {
+		return ID;
+	}
+	
+	@Override
+	public String toString() {
 		return ID;
 	}
 

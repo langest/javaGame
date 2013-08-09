@@ -42,7 +42,7 @@ public class Demo extends BasicGame {
 		
 		camera = new Camera(gc);
 
-		dot = new Entity("dot", entityManager);
+		dot = new Entity("Player", entityManager);
 		dot.setPosition(new Vector2D(461, 300));
 		dot.addComponent(ComponentType.RENDER, new ImageRenderComponent(new Image("/img/img.jpg"), dot));
 		dot.addComponent(ComponentType.CONTROLLER, new ControllerComponent(dot));
@@ -51,7 +51,7 @@ public class Demo extends BasicGame {
 		dot.initComponents();
 		entityManager.add(dot);
 		
-		dot2 = new Entity("dot2", entityManager);
+		dot2 = new Entity("NPC", entityManager);
 		dot2.setPosition(new Vector2D(300, 150));
 		dot2.addComponent(ComponentType.RENDER, new ImageRenderComponent(new Image("/img/img.jpg"), dot2));
 		dot2.addComponent(ComponentType.PHYSICS, new PhysicsComponent(dot2, 10f));
