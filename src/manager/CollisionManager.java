@@ -14,9 +14,27 @@ import math.Vector2D;
 
 public class CollisionManager {
 
-	
-	public float getCollisionAngle(CollisionComponentRect a, Vector2D aPos, CollisionComponentRect b, Vector2D bPos) {
-			return 0;
+	/*
+	 * returns a float that is the collision is in, else 0.
+	 */
+	public float checkCollision(CollisionComponentRect a, CollisionComponentRect b, float angleFromAToB) {
+		
+		//Compare y-vectors (for now only rect)
+		if (angleFromAToB < 0) { //a is above b
+			System.out.print("OVER ");
+		}
+		else { //a is under b
+			System.out.print("UNDER ");
+		}
+		
+		//Compare x-vectors (for now only rect)
+		if (angleFromAToB < Math.PI/2 && angleFromAToB > -Math.PI/2) { //a is to the right
+			System.out.println("and on the RIGHT.");
+		} else { //a is to the left
+			System.out.println("and on the LEFT.");
+		}
+		
+		return 0;
 
 	}
 
@@ -27,8 +45,10 @@ public class CollisionManager {
 			c1 = (CollisionComponentRect) e1.getComponentByType(ComponentType.COLLISION);
 			for (Entity e2 : entityList) {
 				c2 = (CollisionComponentRect) e2.getComponentByType(ComponentType.COLLISION);
-				if (!e1.toString().equals("Player") && e2.toString().equals("Player")) System.out.println("Collision between " + e1 + " and " + e2 + " results in angle: "
-				+ e1.getPosition().getAngleToPos(e2.getPosition()));
+				if (!e1.toString().equals("Player") && e2.toString().equals("Player")) {
+					System.out.println("Collision between " + e1 + " and " + e2 + " results in angle: "	+ e1.getPosition().getAngleToPos(e2.getPosition()));
+					checkCollision(c1, c2, e1.getPosition().getAngleToPos(e2.getPosition()));
+				}
 			}
 		}
 	}
