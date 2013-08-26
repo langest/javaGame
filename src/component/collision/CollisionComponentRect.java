@@ -1,7 +1,5 @@
 package component.collision;
 
-import java.util.ArrayList;
-
 import math.Vector2D;
 
 import org.newdawn.slick.BasicGame;
@@ -15,20 +13,22 @@ import entity.Entity;
 public class CollisionComponentRect extends Component{
 
 	private float width,
-	height;
+				  height;
 
-	public CollisionComponentRect(Entity owner, float width, float height) {
+	public CollisionComponentRect(Entity owner) {
 		super(ComponentType.COLLISION, owner);
 
-		this.width = width;
-		this.height = height;
+		this.width = owner.getWidth();
+		this.height = owner.getHeight();
 	}
 
-	/**
+	/** TODO check documentation so that it is correct
 	 * Returns the separating axises for this collision component.
 	 * The "o" in the following illustration is the vector for the rect entitys
-	 * x-component SAT if the entity is down to the right and the t
+	 * x-component SAT if the entity is down to the right and the "0"
 	 * is the corresponding y-component SAT.
+	 * So the returned vector is actually pointing at the corner of the rectangle,
+	 * but shouldn't be used that way.
 	 * 
 	 * 	+---------------o-----------> x-axis
 	 * 	|				|
@@ -37,7 +37,7 @@ public class CollisionComponentRect extends Component{
 	 * 	|
 	 * 	|				|
 	 * 	|
-	 * 	y- - - - - - - -[------]
+	 * 	0- - - - - - - -[------]
 	 * 	|				[------]  <-rect entity
 	 * 	|
 	 * 	|
@@ -46,36 +46,38 @@ public class CollisionComponentRect extends Component{
 	 * 
 	 * Throws exception if (angle < -Math.PI || Math.PI < angle)
 	 * 
+	 * 
 	 * Angle is the direction to the center of the other collision components owner.
 	 * As the unit circle. As radians.
-	 * First in the list is the owners position, second in list is the vertical SAT, third The horizontal.
 	 */
-	public ArrayList<Vector2D> getSATRect(float angle) {
+	public Vector2D getSATRect(float angle) {
 		
 		if (angle < -Math.PI || Math.PI < angle) throw new IllegalArgumentException("angle must be in [-Pi,Pi]");
 		
 		angle = (float) (angle % (Math.PI * 2)); //The angle we want to calculate SAT for
-		ArrayList<Vector2D> ret = new ArrayList<Vector2D>(); //The array that will containing the SATs for given angle
 		Vector2D ownerPos = owner.getPosition();
 
 		if (angle < -Math.PI/2) {
-			ret.add(new Vector2D(0,ownerPos.y - height/2));
-			ret.add(new Vector2D(ownerPos.x - width/2, 0));
+			return new Vector2D(ownerPos.x - width/2, ownerPos.y - height/2);
 		}
-		else if (angle < 0) {
-			ret.add(new Vector2D(0,ownerPos.y - height/2));
-			ret.add(new Vector2D(ownerPos.x + width/2, 0));
+		
+		if (angle < 0) {
+			return new Vector2D(ownerPos.x + width/2, ownerPos.y - height/2);
 		}
-		else if (angle < Math.PI/2) {
-			ret.add(new Vector2D(0, ownerPos.y + height/2));
-			ret.add(new Vector2D(ownerPos.x - width/2, 0));
+		
+		if (angle < Math.PI/2) {
+			return new Vector2D(ownerPos.x - width/2, ownerPos.y + height/2);
 		}
-		else /*if(angle < Math.PI)*/ {
-			ret.add(new Vector2D(0, ownerPos.y + height/2));
-			ret.add(new Vector2D(ownerPos.x + width/2, 0));
-		}
+		/*if(angle < Math.PI)*/
+			return new Vector2D(ownerPos.x + width/2, ownerPos.y + height/2);
 
-		return ret;
+	}
+	
+	public float getHeight() {
+		return this.height;
+	}
+	public float getWidth() {
+		return this.width;
 	}
 
 	@Override
