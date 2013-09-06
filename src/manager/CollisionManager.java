@@ -29,7 +29,7 @@ public class CollisionManager {
 			//System.out.print("OVER ");
 
 			if (aSAT.y > bSAT.y && aSAT.y < bSAT.y + b.getHeight()) {
-				minSATOverlapY = aSAT.y - bSAT.y;
+				minSATOverlapY = bSAT.y - aSAT.y;
 			}
 
 		}
@@ -37,7 +37,7 @@ public class CollisionManager {
 			//System.out.print("UNDER ");
 
 			if (aSAT.y < bSAT.y && aSAT.y > bSAT.y - b.getHeight()) {
-				minSATOverlapY = aSAT.y - bSAT.y;
+				minSATOverlapY = bSAT.y - aSAT.y;
 			}
 		}
 
@@ -46,22 +46,38 @@ public class CollisionManager {
 			//System.out.println("and on the RIGHT.");
 
 			if (aSAT.x < bSAT.x && aSAT.x > bSAT.x - b.getWidth()) {
-				minSATOverlapX = aSAT.x - bSAT.x;
+				minSATOverlapX = bSAT.x - aSAT.x;
 			}
 
 		} else { //a is to the left
 			//System.out.println("and on the LEFT.");
 
 			if (aSAT.x > bSAT.x && aSAT.x < bSAT.x + b.getWidth()) {
-				minSATOverlapX = aSAT.x - bSAT.x;
+				minSATOverlapX = bSAT.x - aSAT.x;
 			}
 
 		}
 
 		if (minSATOverlapY != Float.MAX_VALUE && minSATOverlapX != Float.MAX_VALUE) {
-			// We have collision!! WOOOyyyyyy
-			System.out.println("krock!! WOOO");
+			// We have collision!! WOOO
+			
+			if (Math.abs(minSATOverlapX) > Math.abs(minSATOverlapY)) { //We got a collision in the x-axis
+				if (minSATOverlapX < 0) {
+					System.out.println("Collision from left");
+				} else {
+					System.out.println("Collision from right");
+				}
+			} else { //We got a collision in the y-axis
+				if (minSATOverlapY < 0) {
+					System.out.println("Collision from top");
+				} else {
+					System.out.println("Collision from under");
+				}
+			}
 		}
+
+		System.out.println("X: " + minSATOverlapX + "\nY: " + minSATOverlapY);
+		
 		return 0;
 
 	}
