@@ -56,7 +56,7 @@ public class Demo extends BasicGame {
 		
 		
 		dot = new Entity("Player", entityManager);
-		dot.setPosition(new Vector2D(461, 300));
+		dot.setPosition(new Vector2D(300, 150));
 		dot.addComponent(ComponentType.RENDER, new ImageRenderComponent(new Image("/img/oldMan.png"), dot));
 		dot.addComponent(ComponentType.CONTROLLER, new ControllerComponent(dot));
 		//dot.addComponent(ComponentType.GRAVITATION, new GravitationComponent(dot));
