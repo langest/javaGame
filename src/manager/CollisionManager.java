@@ -76,7 +76,7 @@ public class CollisionManager {
 			}
 		}
 
-		System.out.println("X: " + minSATOverlapX + "\nY: " + minSATOverlapY);
+		// System.out.println("X: " + minSATOverlapX + "\nY: " + minSATOverlapY);
 		
 		return 0;
 

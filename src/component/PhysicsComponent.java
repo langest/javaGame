@@ -9,7 +9,7 @@ import entity.Entity;
 
 public class PhysicsComponent extends Component{
 	
-	public static final float STANDARD_ACCELERATION = .001f;
+	public static final float STANDARD_ACCELERATION = .0005f;
 
 	private float weight;
 	private Vector2D velocity;
