@@ -43,24 +43,30 @@ public class Demo extends BasicGame {
 		
 		camera = new Camera(gc);
 
-		dot = new Entity("Player", entityManager);
-		dot.setPosition(new Vector2D(461, 300));
-		dot.addComponent(ComponentType.RENDER, new ImageRenderComponent(new Image("/img/img.jpg"), dot));
-		dot.addComponent(ComponentType.CONTROLLER, new ControllerComponent(dot));
-		//dot.addComponent(ComponentType.GRAVITATION, new GravitationComponent(dot));
-		dot.addComponent(ComponentType.PHYSICS, new PhysicsComponent(dot, 10f));
-		dot.addComponent(ComponentType.COLLISION, new CollisionComponentRect(dot));
-		dot.initComponents();
-		entityManager.add(dot);
+
 		
 		dot2 = new Entity("NPC", entityManager);
 		dot2.setPosition(new Vector2D(300, 150));
 		dot2.addComponent(ComponentType.RENDER, new ImageRenderComponent(new Image("/img/img.jpg"), dot2));
 		dot2.addComponent(ComponentType.PHYSICS, new PhysicsComponent(dot2, 10f));
 		//dot2.addComponent(ComponentType.GRAVITATION, new GravitationComponent(dot2));
-		dot2.addComponent(ComponentType.COLLISION, new CollisionComponentRect(dot2));
 		dot2.initComponents();
 		entityManager.add(dot2);
+		
+		
+		dot = new Entity("Player", entityManager);
+		dot.setPosition(new Vector2D(300, 150));
+		dot.addComponent(ComponentType.RENDER, new ImageRenderComponent(new Image("/img/img.jpg"), dot));
+		dot.addComponent(ComponentType.CONTROLLER, new ControllerComponent(dot));
+		//dot.addComponent(ComponentType.GRAVITATION, new GravitationComponent(dot));
+		dot.addComponent(ComponentType.PHYSICS, new PhysicsComponent(dot, 10f));
+		dot.initComponents();
+		entityManager.add(dot);
+		System.out.println(dot.getHeight());
+		System.out.println(dot.getWidth());
+		System.out.println(dot2.getHeight());
+		System.out.println(dot2.getWidth());
+		
 
 		gc.setTargetFrameRate(60);
 	}

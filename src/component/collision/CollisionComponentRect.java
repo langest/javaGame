@@ -51,8 +51,7 @@ public class CollisionComponentRect extends Component{
 	 * As the unit circle. As radians.
 	 */
 	public Vector2D getSATRect(float angle) {
-		
-		if (angle < -Math.PI || Math.PI < angle) throw new IllegalArgumentException("angle must be in [-Pi,Pi]");
+		if (angle < (float) -Math.PI || (float) Math.PI < angle) throw new IllegalArgumentException("angle must be in [-Pi,Pi]");
 		
 		angle = (float) (angle % (Math.PI * 2)); //The angle we want to calculate SAT for
 		Vector2D ownerPos = owner.getPosition();

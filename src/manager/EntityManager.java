@@ -11,11 +11,11 @@ import entity.Entity;
 public class EntityManager {
 
 	private ArrayList<Entity> entityList;
-	private CollisionManager collisionManager;
+	private CollisionManagerV2 collisionManager;
 
 	public EntityManager() {
 		this.entityList = new ArrayList<Entity>();
-		this.collisionManager = new CollisionManager();
+		this.collisionManager = new CollisionManagerV2();
 	}
 
 	public void add(Entity e) {
