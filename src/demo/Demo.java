@@ -11,7 +11,6 @@ import org.newdawn.slick.SlickException;
 import component.ComponentType;
 import component.ControllerComponent;
 import component.PhysicsComponent;
-import component.collision.CollisionComponentRect;
 import component.render.ImageRenderComponent;
 
 import camera.*;
@@ -47,7 +46,7 @@ public class Demo extends BasicGame {
 		
 		dot2 = new Entity("NPC", entityManager);
 		dot2.setPosition(new Vector2D(300, 150));
-		dot2.addComponent(ComponentType.RENDER, new ImageRenderComponent(new Image("/img/img.jpg"), dot2));
+		dot2.addComponent(ComponentType.RENDER, new ImageRenderComponent(new Image("/img/img.png"), dot2));
 		dot2.addComponent(ComponentType.PHYSICS, new PhysicsComponent(dot2, 10f));
 		//dot2.addComponent(ComponentType.GRAVITATION, new GravitationComponent(dot2));
 		dot2.initComponents();
@@ -56,7 +55,7 @@ public class Demo extends BasicGame {
 		
 		dot = new Entity("Player", entityManager);
 		dot.setPosition(new Vector2D(300, 150));
-		dot.addComponent(ComponentType.RENDER, new ImageRenderComponent(new Image("/img/img.jpg"), dot));
+		dot.addComponent(ComponentType.RENDER, new ImageRenderComponent(new Image("/img/img.png"), dot));
 		dot.addComponent(ComponentType.CONTROLLER, new ControllerComponent(dot));
 		//dot.addComponent(ComponentType.GRAVITATION, new GravitationComponent(dot));
 		dot.addComponent(ComponentType.PHYSICS, new PhysicsComponent(dot, 10f));
