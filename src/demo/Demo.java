@@ -48,10 +48,10 @@ public class Demo extends BasicGame {
 		dot2 = new Entity("NPC", entityManager);
 		dot2.setPosition(new Vector2D(300, 150));
 		dot2.addComponent(ComponentType.RENDER, new ImageRenderComponent(new Image("/img/img.png"), dot2));
-		dot2.addComponent(ComponentType.PHYSICS, new PhysicsComponent(dot2, 10f));
+		dot2.addComponent(ComponentType.PHYSICS, new PhysicsComponent(dot2, 5f));
 		dot2.addComponent(ComponentType.GRAVITATION, new GravitationComponent(dot2));
 		dot2.initComponents();
-		//dot2.addComponent(ComponentType.COLLISION_ACTION, new WallComponent(dot2));
+		dot2.addComponent(ComponentType.COLLISION_ACTION, new WallComponent(dot2));
 		entityManager.add(dot2);
 		
 		
@@ -60,7 +60,7 @@ public class Demo extends BasicGame {
 		dot.addComponent(ComponentType.RENDER, new ImageRenderComponent(new Image("/img/img.png"), dot));
 		dot.addComponent(ComponentType.CONTROLLER, new ControllerComponent(dot));
 		//dot.addComponent(ComponentType.GRAVITATION, new GravitationComponent(dot));
-		dot.addComponent(ComponentType.PHYSICS, new PhysicsComponent(dot, 10f));
+		dot.addComponent(ComponentType.PHYSICS, new PhysicsComponent(dot, 5f));
 		dot.initComponents();
 		entityManager.add(dot);
 //		System.out.println(dot.getHeight());
