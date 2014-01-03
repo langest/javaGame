@@ -10,9 +10,10 @@ import org.newdawn.slick.SlickException;
 
 import component.ComponentType;
 import component.ControllerComponent;
+import component.GravitationComponent;
 import component.PhysicsComponent;
+import component.collision.WallComponent;
 import component.render.ImageRenderComponent;
-
 import camera.*;
 import entity.Entity;
 import math.Vector2D;
@@ -48,23 +49,24 @@ public class Demo extends BasicGame {
 		dot2.setPosition(new Vector2D(300, 150));
 		dot2.addComponent(ComponentType.RENDER, new ImageRenderComponent(new Image("/img/img.png"), dot2));
 		dot2.addComponent(ComponentType.PHYSICS, new PhysicsComponent(dot2, 10f));
-		//dot2.addComponent(ComponentType.GRAVITATION, new GravitationComponent(dot2));
+		dot2.addComponent(ComponentType.GRAVITATION, new GravitationComponent(dot2));
 		dot2.initComponents();
+		//dot2.addComponent(ComponentType.COLLISION_ACTION, new WallComponent(dot2));
 		entityManager.add(dot2);
 		
 		
 		dot = new Entity("Player", entityManager);
-		dot.setPosition(new Vector2D(300, 150));
+		dot.setPosition(new Vector2D(400, 250));
 		dot.addComponent(ComponentType.RENDER, new ImageRenderComponent(new Image("/img/img.png"), dot));
 		dot.addComponent(ComponentType.CONTROLLER, new ControllerComponent(dot));
 		//dot.addComponent(ComponentType.GRAVITATION, new GravitationComponent(dot));
 		dot.addComponent(ComponentType.PHYSICS, new PhysicsComponent(dot, 10f));
 		dot.initComponents();
 		entityManager.add(dot);
-		System.out.println(dot.getHeight());
-		System.out.println(dot.getWidth());
-		System.out.println(dot2.getHeight());
-		System.out.println(dot2.getWidth());
+//		System.out.println(dot.getHeight());
+//		System.out.println(dot.getWidth());
+//		System.out.println(dot2.getHeight());
+//		System.out.println(dot2.getWidth());
 		
 
 		gc.setTargetFrameRate(60);

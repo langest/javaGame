@@ -10,6 +10,7 @@ import math.Vector2D;
 import component.Component;
 import component.ComponentException;
 import component.ComponentType;
+import component.collision.CollisionActionComponent;
 import component.render.RenderComponent;
 import component.RenderableComponent;
 import manager.EntityManager;
@@ -96,6 +97,14 @@ public class Entity{
 
 	public String getId() {
 		return ID;
+	}
+	
+	public void collide(Entity e, int dir) {
+		for (Component c : components.values()) {
+			if (c.getComponentType() == ComponentType.COLLISION_ACTION) {
+				((CollisionActionComponent) c).collide(e, dir);
+			}
+		}
 	}
 	
 	@Override

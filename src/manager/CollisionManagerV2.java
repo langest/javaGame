@@ -6,7 +6,9 @@ import org.newdawn.slick.BasicGame;
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
 
+import component.Component;
 import component.ComponentType;
+import component.RenderableComponent;
 import component.collision.CollisionComponentRect;
 import constants.Constants;
 import entity.Entity;
@@ -18,8 +20,8 @@ public class CollisionManagerV2 {
 
 	}
 
-	public double checkCollisions(Entity e1, Entity e2) {
-
+	public void checkCollisions(Entity e1, Entity e2) {
+		
 		/*pseduocode
 		var length:Number = box2.x - box1.x;
 	var half_width_box1:Number = box1.width*0.5;
@@ -87,14 +89,24 @@ public class CollisionManagerV2 {
 			else System.out.println("We hit mostly from underneath");
 		}*/
 		
-		if (verGapBetweenBoxes > 0 || horGapBetweenBoxes > 0) return Constants.HIT_NO_HIT;
+		if (verGapBetweenBoxes > 0 || horGapBetweenBoxes > 0) {
+			return;
+		}
 		
 		if (horGapBetweenBoxes > verGapBetweenBoxes) {
-			if (fromRight) return Constants.HIT_FROM_RIGHT;
-			else return Constants.HIT_FROM_LEFT;
+			if (fromRight) {
+				e1.collide(e2, Constants.HIT_FROM_RIGHT);
+			}
+			else {
+				e1.collide(e2, Constants.HIT_FROM_LEFT);
+			}
 		} else {
-			if (fromAbove) return Constants.HIT_FROM_ABOVE;
-			else return Constants.HIT_FROM_UNDER;
+			if (fromAbove) {
+				e1.collide(e2, Constants.HIT_FROM_ABOVE);
+			}
+			else {
+				e1.collide(e2, Constants.HIT_FROM_UNDER);
+			}
 		}
 		
 
@@ -106,7 +118,7 @@ public class CollisionManagerV2 {
 				if (!e1.toString().equals("Player") && e2.toString().equals("Player") ) {
 					/* debugging */
 					//System.out.println("Collision between " + e1 + " and " + e2 + " results in angle: "	+ e1.getPosition().getAngleToPos(e2.getPosition()));
-					System.out.println(checkCollisions(e1, e2));
+					checkCollisions(e1, e2);
 
 				}
 
