@@ -8,8 +8,8 @@ import org.newdawn.slick.Graphics;
 
 import component.Component;
 import component.ComponentType;
-import component.RenderableComponent;
 import component.collision.CollisionComponentRect;
+import component.render.RenderableComponent;
 import constants.Constants;
 import entity.Entity;
 

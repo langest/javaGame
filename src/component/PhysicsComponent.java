@@ -9,13 +9,15 @@ import entity.Entity;
 
 public class PhysicsComponent extends Component{
 	
-	public static final float STANDARD_ACCELERATION = .0001f;
+	public static final float STANDARD_ACCELERATION = .1f;
 
 	private float weight;
 	private Vector2D velocity;
 	private Vector2D acceleration;
-	private float friction = 1.00001f;
+	private float friction = 1.01f,
+				  gravity  = 0.1f;
 	private float maxVelocity = -STANDARD_ACCELERATION / ((1 / friction) - 1);
+	private boolean isGroundBound = false;
 
 
 	public PhysicsComponent(Entity owner, float weight) {
@@ -41,7 +43,7 @@ public class PhysicsComponent extends Component{
 	public void setVelocity(Vector2D velocity) {
 		this.velocity = velocity;
 	}
-;
+
 	/**
 	 * Calculates the new velocity in a direction given the old velocity and the acceleration.
 	 * 
@@ -67,7 +69,7 @@ public class PhysicsComponent extends Component{
 	 * @param delta
 	 * @return
 	 */
-	protected float newVelocity(float velocity, float acceleration, int delta) {
+	protected float newVelocity(float velocity, float acceleration, float friction, int delta) {
 		float newVelocity = (float) (velocity / Math.pow(friction, delta));
 		if (friction == 1) {
 			return newVelocity + acceleration * delta;
@@ -76,6 +78,10 @@ public class PhysicsComponent extends Component{
 		}
 	}
 
+    protected float applyGravity(float velocity, int delta) {
+        return velocity + gravity * delta;
+    }
+	
 	public void accelerate(Vector2D acc) {
 		this.acceleration.add(acc);
 	}
@@ -84,8 +90,8 @@ public class PhysicsComponent extends Component{
 		
 		Vector2D oldVelocity = new Vector2D(velocity.x, velocity.y);
 		
-		velocity.x = newVelocity(velocity.x, acceleration.x, delta);
-		velocity.y = newVelocity(velocity.y, acceleration.y, delta);
+		velocity.x = newVelocity(velocity.x, acceleration.x, friction, delta);
+		velocity.y = newVelocity(velocity.y, acceleration.y, 1, delta);
 		
 		if (velocity.getMagnitude() > maxVelocity) {
 			float scaling = maxVelocity / velocity.getMagnitude();
@@ -98,6 +104,8 @@ public class PhysicsComponent extends Component{
 		position.x = position.x + (float) delta / 2 * (oldVelocity.x + velocity.x); //Heun's method
 		position.y = position.y + (float) delta / 2 * (oldVelocity.y + velocity.y);
 		
+		if (acceleration.y != 0) isGroundBound = false;
+		
 		resetAcceleration();
 		
 	}
@@ -105,6 +113,14 @@ public class PhysicsComponent extends Component{
 	private void resetAcceleration() {
 		acceleration.x = 0;
 		acceleration.y = 0;
+	}
+	
+	public boolean isGroundBound() {
+		return isGroundBound;
+	}
+	
+	public void setGroundBound(boolean b) {
+		isGroundBound = b;
 	}
 
 	@Override

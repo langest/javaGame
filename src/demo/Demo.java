@@ -10,9 +10,12 @@ import org.newdawn.slick.SlickException;
 
 import component.ComponentType;
 import component.ControllerComponent;
+import component.DownwardAccelerationComponent;
 import component.GravitationComponent;
 import component.PhysicsComponent;
-import component.collision.WallComponent;
+import component.collision.FloorComponent;
+import component.collision.LeftWallComponent;
+import component.collision.RightWallComponent;
 import component.render.ImageRenderComponent;
 import camera.*;
 import entity.Entity;
@@ -45,22 +48,44 @@ public class Demo extends BasicGame {
 
 
 		
-		dot2 = new Entity("NPC", entityManager);
-		dot2.setPosition(new Vector2D(300, 150));
-		dot2.addComponent(ComponentType.RENDER, new ImageRenderComponent(new Image("/img/img.png"), dot2));
-		dot2.addComponent(ComponentType.PHYSICS, new PhysicsComponent(dot2, 5f));
-		dot2.addComponent(ComponentType.GRAVITATION, new GravitationComponent(dot2));
-		dot2.initComponents();
-		dot2.addComponent(ComponentType.COLLISION_ACTION, new WallComponent(dot2));
-		entityManager.add(dot2);
+//		dot2 = new Entity("NPC", entityManager);
+//		dot2.setPosition(new Vector2D(300, 50));
+//		dot2.addComponent(ComponentType.RENDER, new ImageRenderComponent(new Image("/img/img.png"), dot2));
+//		dot2.addComponent(ComponentType.PHYSICS, new PhysicsComponent(dot2, 10f));
+//		dot2.addComponent(ComponentType.GRAVITATION, new GravitationComponent(dot2));
+//		dot2.initComponents();
+//		
+//		entityManager.add(dot2);
 		
+		for (int i=0; i<50; i++) {
+			Entity e = new Entity("NPC"+i, entityManager);
+			e.addComponent(ComponentType.RENDER, new ImageRenderComponent(new Image("/img/img.png"), e));
+			e.setPosition(new Vector2D(e.getWidth()*i, 400));
+			e.addComponent(ComponentType.COLLISION_FLOOR, new FloorComponent(e));
+			e.initComponents();
+			entityManager.add(e);
+			
+		}
+		
+		for (int i=0; i<5; i++) {
+			Entity e = new Entity("NPC"+i, entityManager);
+			e.addComponent(ComponentType.RENDER, new ImageRenderComponent(new Image("/img/img.png"), e));
+			e.setPosition(new Vector2D(e.getWidth()*3.5f*i, 400-e.getHeight()));
+			e.addComponent(ComponentType.COLLISION_FLOOR, new FloorComponent(e));
+			e.addComponent(ComponentType.COLLISION_LEFT_WALL, new LeftWallComponent(e));
+			e.addComponent(ComponentType.COLLISION_RIGHT_WALL, new RightWallComponent(e));
+			e.initComponents();
+			entityManager.add(e);
+			
+		}
 		
 		dot = new Entity("Player", entityManager);
 		dot.setPosition(new Vector2D(400, 250));
 		dot.addComponent(ComponentType.RENDER, new ImageRenderComponent(new Image("/img/img.png"), dot));
 		dot.addComponent(ComponentType.CONTROLLER, new ControllerComponent(dot));
 		//dot.addComponent(ComponentType.GRAVITATION, new GravitationComponent(dot));
-		dot.addComponent(ComponentType.PHYSICS, new PhysicsComponent(dot, 5f));
+		dot.addComponent(ComponentType.PHYSICS, new PhysicsComponent(dot, 10f));
+		dot.addComponent(ComponentType.DOWNWARD_ACCELERATION, new DownwardAccelerationComponent(dot));
 		dot.initComponents();
 		entityManager.add(dot);
 //		System.out.println(dot.getHeight());

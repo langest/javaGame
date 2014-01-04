@@ -12,7 +12,7 @@ import component.ComponentException;
 import component.ComponentType;
 import component.collision.CollisionActionComponent;
 import component.render.RenderComponent;
-import component.RenderableComponent;
+import component.render.RenderableComponent;
 import manager.EntityManager;
 
 public class Entity{
